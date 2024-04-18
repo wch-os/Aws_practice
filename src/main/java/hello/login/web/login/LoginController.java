@@ -22,19 +22,19 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
-        return "/login/loginForm";
+        return "login/loginForm";
     }
 
     //@PostMapping("/login")
     public String loginV1(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
-            return "/login/loginForm";
+            return "login/loginForm";
         }
 
         Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 잘못되었습니다.");
-            return "/login/loginForm";
+            return "login/loginForm";
         }
 
         // 로그인 성공 처리 TODO
@@ -48,13 +48,13 @@ public class LoginController {
     // @PostMapping("/login")
     public String loginV2(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
-            return "/login/loginForm";
+            return "login/loginForm";
         }
 
         Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 잘못되었습니다.");
-            return "/login/loginForm";
+            return "login/loginForm";
         }
 
         // 세션 관리자를 통해 세션을 생성하고, 회원 데이터 보관
@@ -66,13 +66,13 @@ public class LoginController {
     // @PostMapping("/login")
     public String loginV3(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            return "/login/loginForm";
+            return "login/loginForm";
         }
 
         Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 잘못되었습니다.");
-            return "/login/loginForm";
+            return "login/loginForm";
         }
 
         // 로그인 성공 처리
@@ -93,13 +93,13 @@ public class LoginController {
                           HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
-            return "/login/loginForm";
+            return "login/loginForm";
         }
 
         Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 잘못되었습니다.");
-            return "/login/loginForm";
+            return "login/loginForm";
         }
 
         // 로그인 성공 처리
