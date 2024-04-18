@@ -21,7 +21,7 @@ public class LoginController {
     private final SessionManager sessionManager;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute LoginForm form) {
+    public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
         return "/login/loginForm";
     }
 
@@ -91,6 +91,7 @@ public class LoginController {
     public String loginV4(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult,
                           @RequestParam(defaultValue = "/") String redirectURL,
                           HttpServletRequest request) {
+
         if (bindingResult.hasErrors()) {
             return "/login/loginForm";
         }
